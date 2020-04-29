@@ -1,0 +1,10 @@
+cd e:\xampp\mmysql\bin>mysql.exe -u root
+
+sudo-password for root:
+
+REM:
+
+Administrative login
+recipt invoice
+decoration
+Hover over image to zoom

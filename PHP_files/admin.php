@@ -17,7 +17,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html>
     <head>
         <title>Admin view</title>
-        <link rel = "stylesheet" type= "text/css" href = "..\CSS\admin.css">
+        <link rel = "stylesheet" type= "text/css" href = "../CSS/admin.css">
 </head>
 <body>
 <a id="link2" href="login_admin.php" ><b>LOG OUT</b></a>

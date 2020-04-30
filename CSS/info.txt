@@ -1,2 +1,0 @@
-
-This folder contains the CSS files for styling of the php files in this repository.

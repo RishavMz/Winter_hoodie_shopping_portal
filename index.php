@@ -19,7 +19,7 @@ if(isset($_SESSION['ID']))
 <html>
     <head>
         <title>IIITR Hoodie- Login Page</title>
-        <link rel = "stylesheet" type= "text/css" href = "CSS\Login_page.css">
+        <link rel = "stylesheet" type= "text/css" href = "CSS/index.css">
     </head>
     <body>
         <center>
@@ -33,12 +33,12 @@ if(isset($_SESSION['ID']))
         <br><br>
         <h1>
         <div id="login">  
-            <form method="POST" action="PHP_files\Choose.php">
+            <form method="POST" action="PHP_files/Choose.php">
                 <label for="RegNo">Registration Number</label>
                 <br> <br>
                 <input  type="Text" name="ID" id="RegNo" size=18% required>
                 <br><br>
-                <button id="tf" type="submit"  formaction="PHP_files\Choose.php">Proceed</button>
+                <button id="tf" type="submit"  formaction="PHP_files/Choose.php">Proceed</button>
             </form>
         </div>
         </h1>

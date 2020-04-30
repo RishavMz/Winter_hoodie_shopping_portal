@@ -11,3 +11,5 @@ CREATE TABLE ADMINS (ADMI TEXT UNIQUE NOT NULL , PASS TEXT ) ;
 
 The table students contains the data input by the students regarding their choice of hoodies.
 The table admins contains the usernames and passwords for admin login to view all data from students table. 
+
+ONLY THE LOGIN_PAGE.PHP MUST BE ACCESSED AS THE STARTING POINT FOR ANY ACTION, ELSE THE USER WILL BE REDIRECTED TO AN ACCESS DENIED PAGE. TO PREVENT UNAUTHORISED ACCESS TO OTHER PAGES, THIS HAS BEEN DONE.

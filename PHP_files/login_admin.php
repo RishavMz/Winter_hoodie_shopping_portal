@@ -15,7 +15,7 @@ if(isset($_SESSION['admi']))
 <html>
     <head>
         <title>IIITR Hoodie-Admin Login Page</title>
-        <link rel = "stylesheet" type= "text/css" href = "..\CSS\login_admin.css">
+        <link rel = "stylesheet" type= "text/css" href = "../CSS/login_admin.css">
     </head>
     <body>
         <center>

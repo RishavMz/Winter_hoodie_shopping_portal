@@ -33,11 +33,11 @@ foreach( $rows as $row ) {
         <title>
             IIITR Hoodie - Cart
         </title>
-        <link rel = "stylesheet" type= "text/css" href = "..\CSS\cart.css">
+        <link rel = "stylesheet" type= "text/css" href = "../CSS/cart.css">
     </head>
     <body>
         <div id="nav">
-            <a id="link1" href="..\Login_page.php"><b>Log Out</b></a>
+            <a id="link1" href="../index.php"><b>Log Out</b></a>
             <img id="img_nav"src="https://upload.wikimedia.org/wikipedia/en/f/fa/Indian_Institute_of_Information_Technology_Ranchi_Logo.svg" alt="N0 Internet">
             <span id="regno"><b>Welcome <?php echo $_SESSION['ID'] ?></b></span>
         </div>

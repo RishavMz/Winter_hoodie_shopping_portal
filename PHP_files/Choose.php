@@ -50,11 +50,11 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <title>
             IIITR Hoodie- Selection Page
         </title>
-        <link rel = "stylesheet" type= "text/css" href = "..\CSS\Choose.css">
+        <link rel = "stylesheet" type= "text/css" href = "../CSS/Choose.css">
     </head>
     <body >
         <div id="nav">
-            <a id="link1" href="..\Login_page.php"><b>Log Out</b></a>
+            <a id="link1" href="../index"><b>Log Out</b></a>
             <script>
                 function function2()
                 {
@@ -103,7 +103,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </script>
             <button id="button" type="submit"  formaction="Choose.php" onclick="function1();">SAVE</button>
             </form>
-        <img class= "zoom" src="..\images\hoodie_black.jpeg" alt="Sorry, due to some problems the image is not available."  >
+        <img class= "zoom" src="../images/hoodie_black.jpeg" alt="Sorry, due to some problems the image is not available."  >
         <div id="SAMPLE">Sample design:</div>
         <div id="zm">Hover over the image to zoom</div>
         <br>

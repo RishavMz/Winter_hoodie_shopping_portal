@@ -1,6 +1,10 @@
 # Winter_hoodie_shopping_portal
 A web application (a shopping cart system for winter hoodies)
 
+Combination used:
+HTML+CSS (frontend)
+PHP (backend)
+MySql (database)
 
 For testing this application on your server , changes need to be made only in pdo.php file(Selection of host, username, password and database name)
 In the server,  the following 2 database creations must take place.

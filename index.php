@@ -43,7 +43,7 @@ if(isset($_SESSION['ID']))
         </div>
         </h1>
         </center>
-        
+        <img src= "images/hoodie_s.jpg" id = "sample" alt = "Sorry,  This image could not be loaded.">
         <button type="submit" id="login1" onclick='location.href="PHP_files/login_admin.php";'>Admin Login<br>click here </button>
     </body>
 </html>

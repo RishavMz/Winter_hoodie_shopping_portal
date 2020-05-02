@@ -106,8 +106,8 @@
     }
     #price{
         position: absolute;
-        top:600px;
-        right:100px;
+        top:670px;
+        left:100px;
         height:50px;
         width:150px;
         animation-name: example;

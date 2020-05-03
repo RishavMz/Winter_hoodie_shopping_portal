@@ -64,5 +64,9 @@ foreach( $rows as $row ) {
             </center>
                
         </h2>
+     <br>
+        <center>
+<span id="RM" style="color:black;font-style:italic;">------------Made by Rishav Mazumdar-------------</span>
+</center>
     </body>
 </html>

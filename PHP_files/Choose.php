@@ -114,7 +114,8 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div id = "price">
         Rs. 430
         </div>
-        
-        
+        <center>
+<span id="RM" style="color:black;font-style:italic;">------------Made by Rishav Mazumdar-------------</span>
+</center>
     </body>
 </html>

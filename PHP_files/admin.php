@@ -71,3 +71,5 @@ foreach ( $rows as $row ) {
 </center>
 </body>
 </html>
+
+<!-- Initially for testing using the given the database, use username 'person1' and password '12345678'  (without quotes)-->

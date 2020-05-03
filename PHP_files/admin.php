@@ -17,7 +17,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html>
     <head>
         <title>Admin view</title>
-        <link rel = "stylesheet" type= "text/css" href = "../CSS/admin.css">
+        <link rel = "stylesheet" type= "text/css" href = "..\CSS\admin.css">
 </head>
 <body>
 <a id="link2" href="login_admin.php" ><b>LOG OUT</b></a>
@@ -30,7 +30,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </center>
 <br>
 <div id="t">
-    
+   <center> 
 <table >
     <tr style="font-weight:bold;">
         <h3>
@@ -39,6 +39,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <td>Colour</td>
         <td>Size</td>
         <td>State</td>
+        <td>Paid</td>
 </h3>
     </tr>
 <?php
@@ -53,10 +54,20 @@ foreach ( $rows as $row ) {
     echo($row['SIZE']);
     echo("</td><td>");
     echo($row['STATE']);
+    echo("</td><td>");
+    echo($row['paid']);
     echo("</td></tr>\n");
 }
 ?>
 </table>
 </div>
+</center>
+<br><br><br>
+<center>
+
+<a id= "add" href="add.php" >Click here to update details  of students who paid the amount.</a>
+<br><br>
+<span id="RM" style="color:black;font-style:italic;">------------Made by Rishav Mazumdar-------------</span>
+</center>
 </body>
 </html>

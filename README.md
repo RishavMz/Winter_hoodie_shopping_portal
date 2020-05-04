@@ -9,7 +9,7 @@ MySql (database)
 For testing this application on your server , changes need to be made only in pdo.php file(Selection of host, username, password and database name)
 In the server,  the following 2 database creations must take place.
 
-CREATE TABLE STUDENTS (ID TEXT UNIQUE NOT NULL , NAME TEXT , COLOUR TEXT , SIZE TEXT , STATE TEXT DEFAULT 'INCOMPLETE', PAID TEXT DEFAULT 'NO') ;
+CREATE TABLE STUDENTS (ID TEXT UNIQUE NOT NULL , NAME TEXT , COLOUR TEXT , SIZE TEXT , STATE TEXT DEFAULT 'INCOMPLETE', PAID TEXT DEFAULT 'NO' , INDEX(ID) ;
 
 CREATE TABLE ADMINS (ADMI TEXT UNIQUE NOT NULL , PASS TEXT ) ;
 

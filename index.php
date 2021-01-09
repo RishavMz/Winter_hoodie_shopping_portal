@@ -74,7 +74,7 @@ require_once "PHP_files/pdo.php";
           $stmt12->execute(array(':id'=>$row['IMAGE']));
           $rows12 = $stmt12->fetchAll(PDO::FETCH_ASSOC);
           echo '<div class="card">
-          <img class="card-img-top" src="'.substr($rows12[0]['PATH'],3).'" alt="No Image available">
+          <img class="card-img-top" src="'.substr($rows12[0]['PATH'],3).'" alt="'.$rows12[0]['NAME'].'">
           <div class="card-body">
             <h5 class="card-title">'.$row['NAME'].'</h5>
             <p class="card-text">'.$row['PRICE'].'</p>

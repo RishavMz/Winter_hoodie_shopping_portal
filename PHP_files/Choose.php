@@ -4,7 +4,26 @@
 require_once "pdo.php";
 session_start();
 
+if(isset($_POST['submit']) && isset($_SESSION['email']) && isset($_SESSION['ID']))
+{
+  $sql1 = "SELECT * FROM USERS WHERE EMAIL = :EM";
+  $stmt1 = $pdo->prepare($sql1); 
+  $stmt1->execute(array(':EM' => $_SESSION['email']));
+  $rows1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+
+  $sql2 = "SELECT * FROM PRODUCTS WHERE IMAGE = :IK";
+  $stmt2 = $pdo->prepare($sql2); 
+  $stmt2->execute(array(':IK' => $_SESSION['ID']));
+  $rows2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+  $sql = "INSERT INTO ORDERS(USERID , PRODUCTID , SIZE , COLOUR , QUANTITY) VALUES (:A1 , :A2 , :A3 , :A4 , :A5)";
+  $stmt = $pdo->prepare($sql); 
+  $stmt->execute(array(':A1'=>$rows1[0]['ID'] , ':A2'=>$rows2[0]['ID'] , ':A3'=>htmlentities($_POST['size']) , ':A4'=>htmlentities($_POST['colour']) , ':A5'=>htmlentities($_POST['quantity'])));
+}
+
+
 if(isset($_GET['id'])){
+  $_SESSION['ID'] = $_GET['id'];
 $sql = "SELECT * FROM IMAGES WHERE ID = :ID";
 $stmt = $pdo->prepare($sql); 
 $stmt->execute(array(':ID' => $_GET['id']));
@@ -17,6 +36,7 @@ $rows1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 else{
     header('Location:../index.php');
 }
+
 ?>
 
 
@@ -96,7 +116,7 @@ else{
                     <option value="XXS">XXS</option>
                 </select>
                 <label for="colour"><br/><br/>COLOUR:</label>
-                <select name = "size">
+                <select name = "colour">
                     <option value="black">Black</option>
                     <option value="blue">Blue</option>
                     <option value="maaroon">Maroon</option>
@@ -105,6 +125,8 @@ else{
                     <option value="white">White</option>
 
                 </select>
+                <label for = 'quantity'><br/><br/>QUANTITY:</label>
+                <input type = 'number' name = 'quantity' min='1' max='10' value='1' required/>
                 </div>
                 <br/><br/><button type="submit" class = "btn btn-primary" name="submit"  >Add To Cart</button><br/><br/>
                 </form>

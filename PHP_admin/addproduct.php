@@ -3,7 +3,6 @@ session_start();
 require_once "../PHP_files/pdo.php";
 
 $loc = '';
-
 if(isset($_POST['submit'])){	
   // Count total files
   $countfiles = count($_FILES['files']['name']);
@@ -57,6 +56,11 @@ if(isset($_POST['Add_Item']))
   }
 }
 
+if(isset($_POST['msg']))
+{
+  echo '<br/><br/><center><div id="success">'.$_POST['msg'].'</div></center>';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -77,16 +81,18 @@ if(isset($_POST['Add_Item']))
   <div class = "card"><center>
   <br/><br/><br/>
 <div class = "card"style="width: 20rem;">
-<form method='post' action='' enctype='multipart/form-data'>
+<form method='POST' action='' enctype='multipart/form-data'>
     <h5><b>PRODUCT IMAGE:</b></h5><br/><br/>
   	<input type='file' name='files[]' multiple /><br/><br/>
-  	<input type='submit' value='Submit' name='submit' /><br/><br/><br/><br/>
+    <input type = 'text' name='msg' value = 'File uploaded successfully' hidden/>
+  	<input type='submit' value='Upload' name='submit' /><br/><br/><br/><br/>
 </form></div><br/><br/><br/><div class = "card"style="width: 20rem;">
 <form action = "addproduct.php" method="POST">
     <h5><b>PRODUCT NAME:</b></h5><br/>
     <input type = "text" name = "name" placeholder = "Product name"/><br/><br/>
     <h5><b>PRICE:</b></h5><br/>
     <input type = "text" name = "price" placeholder = "Product price"/><br/><br/>
+    <input type = 'text' name='msg' value = 'Product added successfully' hidden/>
     <input type = "submit" name = "Add_Item"/><br/><br/>
 </form></div>
 <br/><br/><br/><center>

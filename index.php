@@ -1,49 +1,92 @@
-<!--
-    Author : RishavMz
-    This is the Login page.
-    This is where anyone accessing the web application must come first, 
-    else an access denied page would be redirected.
-    This page starts the session for the student entry , and also has link to admin view page.
--->
 
 <?php
 session_start();
 if(isset($_SESSION['ID']))
 {
     session_destroy();
-    session_start();
+    session_start();    
 }
+
+require_once "PHP_files/pdo.php";
+
 ?>
 
 
-<html>
-    <head>
-        <title>IIITR Hoodie- Login Page</title>
-        <link rel = "stylesheet" type= "text/css" href = "CSS/index.css">
-    </head>
-    <body>
-        <center>
-            <h1>
-                <br>Welcome to IIIT Ranchi winter hoodie selection Portal<br>
-            </h1>
-        
-        <h2>
-            Enter your Institute Registration number to continue
-        </h2>
-        <br><br>
-        <h1>
-        <div id="login">  
-            <form method="POST" action="PHP_files/Choose.php">
-                <label for="RegNo">Registration Number</label>
-                <br> <br>
-                <input  type="Text" name="ID" id="RegNo" size=18% required>
-                <br><br>
-                <button id="tf" type="submit"  formaction="PHP_files/Choose.php">Proceed</button>
-            </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="CSS/index.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Winter hoodie collection</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><img src = 'IMAGES/logo.png'></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+          </ul>
+          <?php
+            if(isset($_SESSION["email"]))
+            {
+                echo '<span class="navbar-text">
+                    <a class = "nav-link" href="PHP_files/profile.php">Welcome '.$_SESSION["firstname"].'</a>
+                    </span>
+                    <span class="navbar-text">
+                        <a class = "nav-link" href="PHP_files/logout.php">Log Out</a>
+                    </span>';
+            }
+            else
+            {
+                echo'<span class="navbar-text">
+                    <a class = "nav-link" href="PHP_files/login.php">Log In</a>
+                </span>
+                <span class="navbar-text">
+                    <a class = "nav-link" href="PHP_files/signup.php">Sign Up</a>
+                </span>';
+            }
+          ?>
         </div>
-        </h1>
-        </center>
-        <img src= "images/hoodie_s.jpg" id = "sample" alt = "Sorry,  This image could not be loaded.">
-        <button type="submit" id="login1" onclick='location.href="PHP_files/login_admin.php";'>Admin Login<br>click here </button>
+      </nav>
+      <script>
+        function choose(id){
+          location.href="PHP_files/choose.php?id="+id;
+        }
+      </script>
+        <?php
+
+        $sql = "select * from products;";
+        $stmt = $pdo->prepare($sql); 
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo '<br/><br/><div class = "container"><div class="card-columns">';
+        foreach($rows as $row)
+        {
+          $sql12 = "select * from images where ID = :id;";
+          $stmt12 = $pdo->prepare($sql12); 
+          $stmt12->execute(array(':id'=>$row['IMAGE']));
+          $rows12 = $stmt12->fetchAll(PDO::FETCH_ASSOC);
+          echo '<div class="card">
+          <img class="card-img-top" src="'.substr($rows12[0]['PATH'],3).'" alt="No Image available">
+          <div class="card-body">
+            <h5 class="card-title">'.$row['NAME'].'</h5>
+            <p class="card-text">'.$row['PRICE'].'</p>
+          </div>
+          <div class="card-footer">
+          <button type="submit" class = "btn btn-info" value="Add To Cart" onclick="choose('.$row['IMAGE'].')">Add To Cart</button>
+        
+          </div>
+        </div>';
+        }
+        echo '</div></div>';
+
+        ?> 
     </body>
 </html>

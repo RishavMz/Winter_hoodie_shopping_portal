@@ -43,7 +43,6 @@ foreach( $rows as $row ) {
     <body>
     <div id="nav">
             <a id="link2" href="../index.php"><b>Log Out</b></a>
-            <img id="img_nav"src="https://upload.wikimedia.org/wikipedia/en/f/fa/Indian_Institute_of_Information_Technology_Ranchi_Logo.svg" alt="N0 Internet">
             <span id="regno"><b>Welcome <?php echo $_SESSION['ID'] ?></b></span>
         </div>
         <h2>

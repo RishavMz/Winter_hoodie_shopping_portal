@@ -1,121 +1,117 @@
-<!-- Author: RishavMz
-    This php file would allow the students to enter their details which will
-    thereby get updated in the mysql database.
-    This file consists of an upper php part , a middle html part , and a lower css part.
-    Basically , this is where the editting is redirected.
--->
 
 <?php
+
 require_once "pdo.php";
 session_start();
-if(! isset($_SESSION['ID']) && !isset($_POST['ID'])){
-    header("Location:GoAway.html");
-    return;
-}
-if (isset($_POST["ID"])){
-    $_SESSION['ID'] = htmlentities($_POST['ID']);
-    $sql = "SELECT count(*) FROM STUDENTS WHERE ID = (:ssn);";
-    $stmt = $pdo->prepare($sql); 
-    $stmt->execute(array(':ssn' => $_SESSION['ID']));
-    $rows = $stmt->fetchColumn();
-    if ($rows ==0) {
-            $sql = "INSERT INTO students (id) VALUES (:id)";
-            $stmt = $pdo->prepare($sql); 
-            $stmt->execute(array(':id' => $_SESSION["ID"]));
-    }         
-}
-if ( isset($_POST['NAME']) && isset($_POST['COLOUR']) 
-     && isset($_POST['SIZE']))
-{   $var=0;
-    $sql = "SELECT * FROM STUDENTS WHERE ID = (:ssn);";
-    $stmt = $pdo->prepare($sql); 
-    $stmt->execute(array(':ssn' => $_SESSION['ID']));
-    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    foreach ( $rows as $row ){
-        $var = $row['STATE'];
-        break;
-    }
-    if ($var != "COMPLETE"){
-    $sql = "UPDATE students SET name = :name , colour = :colour , size = :size WHERE STUDENTS.ID =(:id);";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(array(':name' => htmlentities($_POST['NAME']),':colour' => $_POST['COLOUR'],':size' => $_POST['SIZE'],':id' => $_SESSION['ID']));
-    }
-}
-$stmt = $pdo->query("SELECT * from students");
+
+if(isset($_GET['id'])){
+$sql = "SELECT * FROM IMAGES WHERE ID = :ID";
+$stmt = $pdo->prepare($sql); 
+$stmt->execute(array(':ID' => $_GET['id']));
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$sql1 = "SELECT * FROM PRODUCTS WHERE IMAGE = :ID";
+$stmt1 = $pdo->prepare($sql1); 
+$stmt1->execute(array(':ID' => $_GET['id']));
+$rows1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+}
+else{
+    header('Location:../index.php');
+}
 ?>
 
-<html>
-    <head>
-        <title>
-            IIITR Hoodie- Selection Page
-        </title>
-        <link rel = "stylesheet" type= "text/css" href = "../CSS/Choose.css">
-    </head>
-    <body >
-        <div id="nav">
-            <a id="link1" href="../index.php"><b>Log Out</b></a>
-            <script>
-                function function2()
-                {
-                    alert("Careful \nAfter clicking on Complete order, NO FURTHER CHANGES will be made")
-                }
-            </script>
-            <a id="link2" href="Cart.php" onclick=function2();><b>View Cart</b></a>
-            <img id="img_nav"src="https://upload.wikimedia.org/wikipedia/en/f/fa/Indian_Institute_of_Information_Technology_Ranchi_Logo.svg" alt="N0 Internet">
-            <span id="regno"><b>Welcome <?php echo htmlentities($_SESSION["ID"]) ?></b></span>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../CSS/index.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Winter hoodie collection</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><img src = 'IMAGES/logo.png'></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+          </ul>
+          <?php
+            if(isset($_SESSION["email"]))
+            {
+                echo '
+                    <span class="navbar-text">
+                    <a class = "nav-link" href="../index.php"> Homepage </a>
+                    </span>
+                    <span class="navbar-text">
+                    <a class = "nav-link" href="profile.php">Welcome '.$_SESSION["firstname"].'</a>
+                    </span>
+                    <span class="navbar-text">
+                        <a class = "nav-link" href="logout.php">Log Out</a>
+                    </span>';
+            }
+            else
+            {
+                echo'
+                <span class="navbar-text">
+                    <a class = "nav-link" href="../index.php"> Homepage </a>
+                    </span>
+                <span class="navbar-text">
+                    <a class = "nav-link" href="login.php">Log In</a>
+                </span>
+                <span class="navbar-text">
+                    <a class = "nav-link" href="signup.php">Sign Up</a>
+                </span>';
+            }
+          ?>
         </div>
-        <h2>
-        <marquee style="color:red;font-size:large;font-weight:normal" direction = "right" behavior = "alternate">
-        Please pay the amount for hoodie (Rs. 430) through GOOGLE PAY to number XXXXXXXXXX.</marquee>
-            
-            <center>
-                <br>
-            Please Enter your details below:<br><br><br>
-            </center>
-        </h2>
-        <h3>
-            <form method="POST" id="form" action="Choose.php">
-                <p class="lab">
-                    <label for="Nam">Please enter your Name:</label><br><br>
-                    <input type="text" name="NAME" id="Nam" size=25% required>
-                </p>
-                <p class="lab1">
-                    <label for="color">Please select a colour</label><br><br>
-                    <input id="b1" type="radio" name="COLOUR" value='black' checked>Black<br>
-                    <input id="b1"type="radio" name="COLOUR" value='blue'>Dark Blue<br>
-                    <input id="b1"type="radio" name="COLOUR" value='maroon'>Maroon<br>
-                </p>
-                <p class="lab">
-                    <label for="siz">Please select your size</label>
-                    <select name="SIZE" id="siz">
-                        <option value="XXL">XXL</option>
-                        <option value="XL">XL</option>
-                        <option value="L">L</option>
-                        <option value="M" selected>M</option>
-                        <option value="S">S</option>
-                        <option value="XS">XS</option>
-                    </select>
-                </p> 
-                <script>
-                    function function1()
-                    {
-                        alert("Click on view cart to view your order");
-                    }
-                </script>
-            <button id="button" type="submit"  formaction="Choose.php" onclick="function1();">SAVE</button>
-            </form>
-        <img class= "zoom" src="../images/hoodie_black.jpeg" alt="Sorry, due to some problems the image is not available."  >
-        <div id="SAMPLE">Sample design:</div>
-        <div id="zm">Hover over the image to zoom</div>
-        <br>
-            
-        </h3>
-        <div id = "price">
-        Rs. 430
+      </nav>
+            <br/><br/>
+            <div class = "row">
+              <div class = "col"><center>
+                <div class = "card" style="width: 18rem">
+                    <?php  echo '<img src = "'.$rows[0]['PATH'].'" alt = "Product image"/>'  ?>
+              </div>
+            <h2>PRICE : <?php echo $rows1[0]['PRICE'];?></center>
+            </div>
+        <div class = "col">
+          <div class = "container">
+            <div class = "card">
+              <center>
+                <form method="POST" action="Choose.php">  
+                <div class = "card" style = "width: 20rem">
+                <label for="size">SIZE:</label>
+                <select name = "size">
+                    <option value="XXL">XXL</option>
+                    <option value="XL">XL</option>
+                    <option value="L">L</option>
+                    <option value="M">M</option>
+                    <option value="S">S</option>
+                    <option value="XS">XS</option>
+                    <option value="XXS">XXS</option>
+                </select>
+                <label for="colour"><br/><br/>COLOUR:</label>
+                <select name = "size">
+                    <option value="black">Black</option>
+                    <option value="blue">Blue</option>
+                    <option value="maaroon">Maroon</option>
+                    <option value="red">Red</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="white">White</option>
+
+                </select>
+                </div>
+                <br/><br/><button type="submit" class = "btn btn-primary" name="submit"  >Add To Cart</button><br/><br/>
+                </form>
+              </center>      
+            </div>
+          </div>
         </div>
-        <center>
-<span id="RM" style="color:black;font-style:italic;">------------Made by Rishav Mazumdar-------------</span>
-</center>
+      </div>  
     </body>
 </html>

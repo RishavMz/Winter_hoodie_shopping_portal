@@ -10,7 +10,7 @@
 
 <?php
 try {
-    $pdo = new PDO("mysql:host=localhost;dbname=db1",'root','');
+    $pdo = new PDO("mysql:host=localhost;dbname=SHOPPINGPORTAL",'root','');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch(PDOException $e) {

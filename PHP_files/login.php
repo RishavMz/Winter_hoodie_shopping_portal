@@ -34,6 +34,11 @@ if(isset($_POST['email'])){
         $_SESSION['booked'] = 0;
         $_SESSION['cart'] = [];
         $_SESSION['price'] = 0;
+        if($_POST['remember'] = 'rem')
+        {
+          setcookie('email', $_SESSION['email'], time() + (86400 * 30), "/");
+          setcookie('firstname', $_SESSION['firstname'], time() + (86400 * 30), "/");
+        }
         //echo "Session set";
       }
       header("Location:../index.php");
@@ -59,7 +64,7 @@ if(isset($_POST['email'])){
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img src = 'IMAGES/logo.png'></a>
+<a class="navbar-brand" href="../index.php"><img CLASS="logo" src = '../IMAGES/logo.png'></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -109,7 +114,7 @@ if(isset($_POST['email'])){
         <label for="password">Password</label>
         <br/><Input type="password" name="password" placeholder="password" required/><br/><br/><br/>
         <label for="remember">Remember Me</label>
-        <Input type="checkbox" name="remember" /><br/><br/><br/>
+        <Input type="checkbox" name="remember" value="rem"/><br/><br/><br/>
         <button type="submit" class = "btn btn-primary" name="submit"  >Log In</button><br/>
     </form>
     </div></center></div>

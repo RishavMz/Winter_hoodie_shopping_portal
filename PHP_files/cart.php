@@ -45,7 +45,7 @@ if(isset($_POST['confirm']))
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img src = 'IMAGES/logo.png'></a>
+    <a class="navbar-brand" href="../index.php"><img CLASS="logo" src = '../IMAGES/logo.png'></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -88,6 +88,7 @@ if(isset($_POST['confirm']))
             }
             else
             {
+                echo '<p><br><br></p>';
                 echo '<div class = "container"><div class = "card">';
                 echo '<div class = "row"><div class = "col"><b>Product Name</b></div><div class = "col"><b>Colour</b></div><div class = "col"><b>Quantity</b></div><div class = "col"><b>Price</b></div></div><br><br>';
                 echo '<p></p>';
@@ -100,6 +101,7 @@ if(isset($_POST['confirm']))
                 }
                 echo '</div></div>';
             }
+            echo '<p><br></p>';
 
             echo '<center><form method="POST" action="cart.php"><button type="submit" name="confirm" class = "btn btn-primary" >Confirm Order</button></form></center>';
       ?>

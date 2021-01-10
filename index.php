@@ -1,5 +1,5 @@
-
 <?php
+
 session_start();
 if(isset($_SESSION['ID']))
 {
@@ -37,7 +37,7 @@ if(isset($_COOKIE['email']) && isset($_COOKIE['firstname']))
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img src = 'IMAGES/logo.png'></a>
+    <a class="navbar-brand" href="index.php"><img CLASS="logo" src = 'IMAGES/logo.png'></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -49,6 +49,9 @@ if(isset($_COOKIE['email']) && isset($_COOKIE['firstname']))
             {
                 echo '<span class="navbar-text">
                     <a class = "nav-link" href="PHP_files/profile.php">Welcome '.$_SESSION["firstname"].'</a>
+                    </span>
+                    <span class="navbar-text">
+                    <a class = "nav-link" href="PHP_files/cart.php">Cart</a>
                     </span>
                     <span class="navbar-text">
                         <a class = "nav-link" href="PHP_files/logout.php">Log Out</a>

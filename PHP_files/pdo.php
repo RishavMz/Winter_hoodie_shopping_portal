@@ -1,12 +1,4 @@
-<!--
-    Author : RishavMz
-    Host presently set to localhost
-    Name of database     : db1
-    Username             : root
-    password             :  -     
-    
-    This php file is just for establishing conection between the PHP and MYSQL and is included in every other php file.
--->    
+   
 
 <?php
 try {

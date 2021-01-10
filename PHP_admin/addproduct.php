@@ -2,6 +2,12 @@
 session_start();
 require_once "../PHP_files/pdo.php";
 
+
+if(!(isset($_SESSION['admin4682'])))
+{
+    header('location:adminlogin.php');
+}
+
 $loc = '';
 if(isset($_POST['submit'])){	
   // Count total files
@@ -76,6 +82,24 @@ if(isset($_POST['msg']))
     <title>Admin Section</title>
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"><img src = 'IMAGES/logo.png'></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+      </ul>
+      <?php
+      echo '
+       <span class="navbar-text">
+       <a class = "nav-link" href="logout.php"> LOG OUT </a>
+       </span>
+       ';
+    
+    ?>
+  </div>
+  </nav>
 <br/>  
 <div class = "container">
   <div class = "card"><center>

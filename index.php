@@ -9,6 +9,17 @@ if(isset($_SESSION['ID']))
 
 require_once "PHP_files/pdo.php";
 
+if(isset($_COOKIE['email']) && isset($_COOKIE['firstname']))
+{
+  $_SESSION['email'] = $_COOKIE['email'];
+  $_SESSION['firstname'] = $_COOKIE['firstname'];
+  if(!(isset($_SESSION['booked']))){
+    $_SESSION['booked'] = 0;
+    $_SESSION['cart'] = [];
+    $_SESSION['price'] = 0;
+  }
+}
+
 ?>
 
 

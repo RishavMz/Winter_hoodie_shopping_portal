@@ -1,45 +1,26 @@
 <?php
 session_start();
-require_once "pdo.php";
+require_once "../PHP_files/pdo.php";
 $salt = 'a59a0e0fcfab450008571e94a5549225';
 
-if(isset($_COOKIE['email']) && isset($_COOKIE['firstname']))
-{
-  $_SESSION['email'] = $_COOKIE['email'];
-  $_SESSION['firstname'] = $_COOKIE['firstname'];
-  if(!(isset($_SESSION['booked']))){
-    $_SESSION['booked'] = 0;
-    $_SESSION['cart'] = [];
-    $_SESSION['price'] = 0;
-  }
-}
-
-if(isset($_POST['email'])){
-  $sql = "select * from users where email = (:em) ;";
+if(isset($_POST['userid'])){
+  $sql = "select * from ADMIN where ADMINNAME = (:em) ;";
   $stmt = $pdo->prepare($sql); 
-  $stmt->execute(array(':em' => htmlentities($_POST['email'])));
+  $stmt->execute(array(':em' => htmlentities($_POST['userid'])));
   $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  if($rows == 0)
+  if(sizeof($rows) == 0)
   {
-    header("Location:login.php?err=1");
+    header("Location:adminlogin.php?err=1");
   }
   else
   {
-
     $pass = $rows[0]['PASSWORD'];
     if (hash('gost',$_POST['password'].$salt) == $pass) {
-      $_SESSION['email'] = htmlentities($_POST['email']);
-      $_SESSION['firstname'] = $rows[0]['FIRSTNAME'];
-      if(!(isset($_SESSION['booked']))){
-        $_SESSION['booked'] = 0;
-        $_SESSION['cart'] = [];
-        $_SESSION['price'] = 0;
-        //echo "Session set";
-      }
-      header("Location:../index.php");
+      $_SESSION['userid'] = $_POST['userid'];
+      $_SESSION['admin4682'] = 543;
     } 
     else{
-      header("Location:login.php?err=2");
+      header("Location:adminlogin.php?err=2");
     } 
   }
 }
@@ -67,20 +48,10 @@ if(isset($_POST['email'])){
           <ul class="navbar-nav mr-auto">
           </ul>
           <?php
-            if(isset($_SESSION["email"]))
+            if(isset($_SESSION["userid"]))
             {
-              header("Location:../index.php");
+              header("Location:addproduct.php");
 
-            }
-            else
-            {
-                echo'
-                <span class="navbar-text">
-                    <a class = "nav-link" href="../index.php"> Homepage </a>
-                    </span>
-                <span class="navbar-text">
-                    <a class = "nav-link" href="signup.php">Sign Up</a>
-                </span>';
             }
           ?>
         </div>
@@ -103,13 +74,11 @@ if(isset($_POST['email'])){
     <div class = "container">
       <div class = "card"><center>
         <div class = "card" style="width:18rem">
-        <form method = "POST" action = "login.php">
-        <label for="email">Email</label>
-        <br/><Input type="text" name="email" placeholder="email" required/><br/><br/><br/>
+        <form method = "POST" action = "adminlogin.php">
+        <label for="userid">Admin UserName</label>
+        <br/><Input type="text" name="userid" placeholder="userid" required/><br/><br/><br/>
         <label for="password">Password</label>
         <br/><Input type="password" name="password" placeholder="password" required/><br/><br/><br/>
-        <label for="remember">Remember Me</label>
-        <Input type="checkbox" name="remember" /><br/><br/><br/>
         <button type="submit" class = "btn btn-primary" name="submit"  >Log In</button><br/>
     </form>
     </div></center></div>

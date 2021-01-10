@@ -53,16 +53,16 @@ if(isset($_POST['email']))
           <?php
             if(isset($_SESSION["email"]))
             {
-                echo '<span class="navbar-text">
-                    <a class = "nav-link" href="profile.php">Welcome '.$_SESSION["firstname"].'</a>
-                    </span>
-                    <span class="navbar-text">
-                        <a class = "nav-link" href="logout.php">Log Out</a>
-                    </span>';
+                header("Location:../index.php");
             }
             else
             {
-                echo'<span class="navbar-text">
+                
+                echo'
+                <span class="navbar-text">
+                    <a class = "nav-link" href="../index.php"> Homepage </a>
+                    </span>
+                    <span class="navbar-text">
                     <a class = "nav-link" href="login.php">Log In</a>
                 </span>'
                 ;
@@ -100,18 +100,19 @@ if(isset($_POST['email']))
         <div class = "card" style="width:18rem">
         <form method = "POST" action = "login.php">
         <label for="firstname">First Name</label>
-        <br/><Input type="text" name="firstname" placeholder="firstname" required/><br/><br/>
-        <label for="lastname">Lastname</label>
-        <br/><Input type="lastname" name="lastname" placeholder="lastname" required/><br/><br/>
-        <label for="email">Email</label>
-        <br/><Input type="email" name="email" placeholder="email" required/><br/><br/>
-        <label for="mobile">Mobile</label>
-        <br/><Input type="number" name="mobile" placeholder="mobile" required/><br/><br/>
-        <label for="password">Password</label>
-        <br/><Input type="password" name="password" placeholder="password" required/><br/><br/>
-        <label for="cpassword">Confirm Password</label>
-        <br/><Input type="password" name="cpassword" placeholder="retype password" required/><br/><br/>
-        <button type="submit" class = "btn btn-primary" name="submit"  >Log In</button><br/>
+        <br/><Input type="text" name="firstname" placeholder="firstname" required/>
+        <label for="lastname"><br/>Lastname</label>
+        <br/><Input type="lastname" name="lastname" placeholder="lastname" required/>
+        <label for="email"><br/>Email</label>
+        <br/><Input type="email" name="email" placeholder="email" required/>
+        <label for="mobile"><br/>Mobile</label>
+        <br/><Input type="number" name="mobile" placeholder="mobile" required/>
+        <label for="password"><br/>Password</label>
+        <br/><Input type="password" name="password" placeholder="password" required/>
+        <label for="cpassword"><br/>Confirm Password</label>
+        <br/><Input type="password" name="cpassword" placeholder="retype password" required/>
+        <label for="gap"><br/><br/></label>
+        <button type="submit" class = "btn btn-primary" name="submit"  >Create Account</button><br/>
     </form>
     </div></center></div>
     </div>

@@ -4,7 +4,15 @@
 require_once "pdo.php";
 session_start();
 
-if(isset($_POST['submit']) && isset($_SESSION['email']) && isset($_SESSION['ID']))
+if(!isset($_SESSION['booked']))
+{
+    header('location:../index.php');
+}/*
+else{
+  echo print_r($_SESSION['cart']);
+}*/
+if(isset($_POST['submit']))
+{  if(isset($_SESSION['email']) && isset($_SESSION['id']))
 {
   $sql1 = "SELECT * FROM USERS WHERE EMAIL = :EM";
   $stmt1 = $pdo->prepare($sql1); 
@@ -13,17 +21,27 @@ if(isset($_POST['submit']) && isset($_SESSION['email']) && isset($_SESSION['ID']
 
   $sql2 = "SELECT * FROM PRODUCTS WHERE IMAGE = :IK";
   $stmt2 = $pdo->prepare($sql2); 
-  $stmt2->execute(array(':IK' => $_SESSION['ID']));
+  $stmt2->execute(array(':IK' => $_SESSION['id']));
   $rows2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-
-  $sql = "INSERT INTO ORDERS(USERID , PRODUCTID , SIZE , COLOUR , QUANTITY) VALUES (:A1 , :A2 , :A3 , :A4 , :A5)";
-  $stmt = $pdo->prepare($sql); 
-  $stmt->execute(array(':A1'=>$rows1[0]['ID'] , ':A2'=>$rows2[0]['ID'] , ':A3'=>htmlentities($_POST['size']) , ':A4'=>htmlentities($_POST['colour']) , ':A5'=>htmlentities($_POST['quantity'])));
+  //echo print_r($rows2);
+  //$sql = "INSERT INTO ORDERS(USERID , PRODUCTID , SIZE , COLOUR , QUANTITY) VALUES (:A1 , :A2 , :A3 , :A4 , :A5)";
+  //$stmt = $pdo->prepare($sql); 
+  //$stmt->execute(array(':A1'=>$rows1[0]['ID'] , ':A2'=>$rows2[0]['ID'] , ':A3'=>htmlentities($_POST['size']) , ':A4'=>htmlentities($_POST['colour']) , ':A5'=>htmlentities($_POST['quantity'])));
+  $_SESSION['booked'] += 1;
+  $_SESSION['cart'] = array_merge($_SESSION['cart'] , array($_SESSION['booked'] => array('userid'=>$rows1[0]['ID'] , 'productid'=>$rows2[0]['ID'] ,'productname'=>$rows2[0]['NAME'], 'size'=>htmlentities($_POST['size']) ,'colour'=>htmlentities($_POST['colour']) ,'quantity'=>htmlentities($_POST['quantity']) , 'price'=>(int)(htmlentities($_POST['quantity'])*$rows2[0]['PRICE']))));
+  $_SESSION['price'] += (int)(htmlentities($_POST['quantity'])*$rows2[0]['PRICE']);
+  header('Location:cart.php');
+}
+  else{
+    echo '<script>alert("You need to Log in first.");</script>';
+    echo '<script>window.location.href="../index.php";</script>';
+  }
 }
 
 
+
 if(isset($_GET['id'])){
-  $_SESSION['ID'] = $_GET['id'];
+  $_SESSION['id'] = $_GET['id'];
 $sql = "SELECT * FROM IMAGES WHERE ID = :ID";
 $stmt = $pdo->prepare($sql); 
 $stmt->execute(array(':ID' => $_GET['id']));
@@ -34,7 +52,14 @@ $stmt1->execute(array(':ID' => $_GET['id']));
 $rows1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 }
 else{
+  if(isset($_SESSION['booked'])){
+    echo '<script>alert("Order Booked Successfully.");</script>';       // Why this script not running
+    header('Location:cart.php');
+  }
+  else{
+    echo '<script>alert("Checkmate - Hacker :P.");</script>';
     header('Location:../index.php');
+  }
 }
 
 ?>

@@ -1,71 +1,107 @@
-<!--Author : RishavMz
-    This page shows the users their entered name, colour and size of their choics, and state of their order.
-    Users can edit their choices by clicking on Edit Responses , or finalize their order by clicking on Complete Order.
-    Once Complete order is clicked , no further changes would be made to the database(for that particular student).
--->
 
 <?php
+
 require_once "pdo.php";
 session_start();
-if(! isset($_SESSION['ID'])){
-    header("Location:GoAway.html");
-    return;
+
+if(!isset($_SESSION['booked']))
+{
+    header('location:../index.php');
 }
-$sql = "SELECT * FROM STUDENTS WHERE ID = (:ssn);";
-$stmt = $pdo->prepare($sql); 
-$stmt->execute(array(':ssn' => $_SESSION['ID']));
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$name = NULL;
-$size = NULL;
-$colour = NULL;
-$state = 'UNPAID';
-foreach( $rows as $row ) {
-    $name = $row['NAME'];
-    $colour = $row['COLOUR'];
-    $size = $row['SIZE'];
-    $state = $row['STATE'];
-    break;
+if(isset($_POST['confirm']))
+{           
+        $pp = 0;
+        foreach ($_SESSION['cart'] as $items){
+            $pp = $pp +(int)$items['price'];
+        }
+        $sql1 = "INSERT INTO ORDERDATABASE(PRICE , USERID) VALUES (:A1 , :A2 )";
+        $stmt1 = $pdo->prepare($sql1); 
+        $stmt1->execute(array(':A2'=>$_SESSION['cart'][0]['userid'] , ':A1'=>$pp ));
+        $sql2 = "SELECT MAX(ORDERID) FROM ORDERDATABASE";
+        $stmt2 = $pdo->prepare($sql2); 
+        $stmt2->execute(array());
+        $rows2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+        
+    foreach ($_SESSION['cart'] as $items){
+        $sql = "INSERT INTO ORDERS(USERID , PRODUCTID , SIZE , COLOUR , QUANTITY,ORDERID) VALUES (:A1 , :A2 , :A3 , :A4 , :A5, :A6)";
+        $stmt = $pdo->prepare($sql); 
+        $stmt->execute(array(':A1'=>$items['userid'] , ':A2'=>$items['productid'] , ':A3'=>$items['size'], ':A4'=>$items['colour'] , ':A5'=>$items['quantity'] , ':A6'=>$rows2[0]['MAX(ORDERID)']));
+    }
+    header('Location:PDF.php');
 }
 
 ?>
-<html>
-    <head>
-        <title>
-            IIITR Hoodie - Cart
-        </title>
-        <link rel = "stylesheet" type= "text/css" href = "../CSS/cart.css">
-    </head>
-    <body>
-        <div id="nav">
-            <a id="link1" href="../index.php"><b>Log Out</b></a>
-            <span id="regno"><b>Welcome <?php echo $_SESSION['ID'] ?></b></span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../CSS/index.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Winter hoodie collection-cart</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><img src = 'IMAGES/logo.png'></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+          </ul>
+          <?php
+            if(isset($_SESSION["email"]))
+            {
+                echo '
+                    <span class="navbar-text">
+                    <a class = "nav-link" href="../index.php"> Homepage </a>
+                    </span>
+                    <span class="navbar-text">
+                    <a class = "nav-link" href="profile.php">Welcome '.$_SESSION["firstname"].'</a>
+                    </span>
+                    <span class="navbar-text">
+                        <a class = "nav-link" href="logout.php">Log Out</a>
+                    </span>';
+            }
+            else
+            {
+                echo'
+                <span class="navbar-text">
+                    <a class = "nav-link" href="../index.php"> Homepage </a>
+                    </span>
+                <span class="navbar-text">
+                    <a class = "nav-link" href="login.php">Log In</a>
+                </span>
+                <span class="navbar-text">
+                    <a class = "nav-link" href="signup.php">Sign Up</a>
+                </span>';
+            }
+          ?>
         </div>
-        <br>
-        <marquee style="color:red;font-size:large;" direction = "right" behavior = "alternate">
-        Please pay the amount for hoodie (Rs. 430) through GOOGLE PAY to number XXXXXXXXXX.</marquee><br>
-        <h1><span id="bs"></span> This is your cart. Here you can preview or  change your orders.</span></h1>
-        <br>
-        <h2>
-            <center>
-             <div id="pre">  <br> 
-                =====================STUDENT DETAILS======================<br><br>
-                        <label for = "regno" >Registration number  :    <?= $_SESSION['ID']; ?>  </label><br><br>
-                        <label for = "name"  >Name        :    <?= $name; ?>  </label><br><br>
-                        <label for = "color" >Colour      :    <?= $colour; ?>  </label><br><br>
-                        <label for = "size"  >Size          :    <?= $size; ?>  </label><br><br>
-                        <label for = "state">State        :    <?= $state; ?>  </label><br><br>
-</div>          </center>
-            <center>
-                <br><br>
-                <input type="button" class="button1" value="Edit Responses" onclick="location.href='Choose.php';">      
-                <input type="button" class="button2" value="Complete Order" onclick="location.href='PDF.php';"
-                <?php if($name==NULL or $size == NULL or $colour = NULL){ echo' disabled = disabled';}?> >      
-            </center>
-               
-        </h2>
-     <br>
-        <center>
-<span id="RM" style="color:black;font-style:italic;">------------Made by Rishav Mazumdar-------------</span>
-</center>
+      </nav>
+      <?php
+            if($_SESSION['booked'] == 0){
+                echo '<br/><br/><br/><center><h1>Your Cart is Empty.</h1></center>';
+            }
+            else
+            {
+                echo '<div class = "container"><div class = "card">';
+                echo '<div class = "row"><div class = "col"><b>Product Name</b></div><div class = "col"><b>Colour</b></div><div class = "col"><b>Quantity</b></div><div class = "col"><b>Price</b></div></div><br><br>';
+                echo '<p></p>';
+                foreach ($_SESSION['cart'] as $items)
+                {
+                    echo '<div class = "row"><div class = "col">'.$items['productname'].'</div>';
+                    echo '<div class = "col">'.$items['colour'].'</div>';
+                    echo '<div class = "col">'.$items['quantity'].'</div>';
+                    echo '<div class = "col">'.$items['price'].'</div></div>';
+                }
+                echo '</div></div>';
+            }
+
+            echo '<center><form method="POST" action="cart.php"><button type="submit" name="confirm" class = "btn btn-primary" >Confirm Order</button></form></center>';
+      ?>
     </body>
 </html>

@@ -93,11 +93,11 @@ if(isset($_COOKIE['email']) && isset($_COOKIE['firstname']))
           <div class="card-body">
             <h5 class="card-title">'.$row['NAME'].'</h5>
             <p class="card-text price">Price:  ¤ '.$row['PRICE'].'</p>
-          </div>
-          <div class="card-footer">
-          <button type="submit" class = "btn btn-info" value="Add To Cart" onclick="choose('.$row['IMAGE'].')">Add To Cart</button>
-        
-          </div>
+          </div>';
+          if(isset($_SESSION["email"]))
+          echo '<div class="card-footer"><button type="submit" class = "btn btn-info" value="Add To Cart" onclick="choose('.$row['IMAGE'].')">Add To Cart</button>
+          </div>';
+          echo '
         </div>';
         }
         echo '</div></div>';

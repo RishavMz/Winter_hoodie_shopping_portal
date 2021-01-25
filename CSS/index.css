@@ -83,14 +83,92 @@ select{
     font-family: 'Roboto';
     font-size: 15pt;
 }
-.card123{
-    background-image: radial-gradient(white,floralwhite,ghostwhite,whitesmoke,white,floralwhite,ghostwhite,whitesmoke);
-    color: black;
-    font-family: 'Roboto';
-    font-size: 20pt;
-}
+@media only screen and (max-width: 480px) {
+    
+    .cont{
+        background-image: radial-gradient(lightblue,lightcyan,lightblue,lightcyan);
+        color: black;
+        font-weight: bold;
+        font-family: 'Roboto';
+        font-size: 10pt;
+        width: 98%;
+        border-radius: 10px;
+    }
+    .cont1{
+        background-color: floralwhite;
+        color: black;
+        font-weight: normal;
+        font-family: 'Roboto';
+        font-size: 6pt;
+        width: 96%;
+        margin-left: 2%;
+        border-radius: 10px;
+    }
 
-#uploadimage{
-    height: 100px;
-    width:auto;
-}
+    .contpdf{
+        color: black;
+        font-weight: bold;
+        font-family: 'Roboto';
+        font-size: 10pt;
+        width: 98%;
+        border-radius: 10px;
+    }
+    .cont1pdf{
+        background-color: floralwhite;
+        color: black;
+        font-weight: normal;
+        font-family: 'Roboto';
+        font-size: 6pt;
+        width: 96%;
+        margin-left: 2%;
+        border-radius: 10px;
+    }
+
+    .card123{
+        background-image: radial-gradient(white,floralwhite,ghostwhite,whitesmoke,white,floralwhite,ghostwhite,whitesmoke);
+        color: black;
+        font-family: 'Roboto';
+        font-size: 8pt;
+    }
+    
+    .chooseimg{
+        height:auto;
+    }
+  }
+  @media only screen and (min-width: 480px) {
+    
+    .cont{
+        background-image: radial-gradient(lightblue,lightcyan,lightblue,lightcyan);
+        color: black;
+        font-weight: bold;
+        font-family: 'Roboto';
+        font-size: 25pt;
+        width: 90%;
+        margin-left: 5%;
+        border-radius: 50px;
+    }
+    .cont1{
+        background-color: floralwhite;
+        color: black;
+        font-weight: normal;
+        font-family: 'Roboto';
+        font-size: 15pt;
+        width: 80%;
+        margin-left: 10%;
+        border-radius: 50px;
+        padding-left: 5%;
+    }
+    .card123{
+        background-image: radial-gradient(white,floralwhite,ghostwhite,whitesmoke,white,floralwhite,ghostwhite,whitesmoke);
+        color: black;
+        font-family: 'Roboto';
+        font-size: 15pt;
+    }
+    .choosecard{
+        width: 20rem;
+    }
+  }
+
+
+
+

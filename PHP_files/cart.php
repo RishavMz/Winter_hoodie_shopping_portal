@@ -103,7 +103,7 @@ if(isset($_POST['confirm']))
             }
             echo '<p><br></p>';
             if(sizeof($_SESSION['cart'])>0)
-                echo '<center><form method="POST" action="cart.php"><button type="submit" name="confirm" class = "btn btn-primary" >Confirm Order</button></form></center>';
+                echo '<center><form method="POST" action="cart.php"><button type="submit" name="confirm" class = "btn btn-success" >Confirm Order</button></form></center>';
       ?>
     </body>
 </html>

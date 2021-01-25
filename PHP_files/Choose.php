@@ -123,7 +123,7 @@ else{
             <div class = "row">
               <div class = "col"><center>
                 <div class = "card" style="width: 18rem">
-                    <?php  echo '<img src = "'.$rows[0]['PATH'].'" alt = "Product image"/>'  ?>
+                    <?php  echo '<img  class = "chooseimg" src = "'.$rows[0]['PATH'].'" alt = "Product image"/>'  ?>
               </div>
               <br/><br/>
             <button class = "btn btn-info" style = "font-family : roboto ; font-size : 20pt; border-radius: 25px;" disabled>PRICE : <?php echo $rows1[0]['PRICE'];?></button></center>
@@ -136,7 +136,7 @@ else{
               <center>
                 <form method="POST" action="Choose.php">  
                   <br/><br/>
-                <div class = "card" style = "width: 20rem">
+                <div class = "card choosecard">
                 <label for="size">SIZE:</label>
                 <select name = "size">
                     <option value="XXL">XXL</option>

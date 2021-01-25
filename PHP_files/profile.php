@@ -59,14 +59,14 @@ if(!isset($_SESSION['email']))
     $rows1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
     echo '<p></p>';
-    echo '<div class = "container"><div class = "card cont"><p><br/><center><h5>Customer Details:</h5></center><br/></p>';
-    echo '<div class = "card cont1">';
+    echo '<div class = "cont"><p><br/><center><h5>Customer Details:</h5></center><br/></p>';
+    echo '<div class = "cont1"><br/>';
     echo '<div class = "row"><div class="col">Customer Name</div><div class = "col">'.$rows1[0]["FIRSTNAME"].' '.$rows1[0]["LASTNAME"].'</div></div><p></p>';
     echo '<div class = "row"><div class="col">Customer Email</div><div class = "col">'.$rows1[0]["EMAIL"].'</div></div><p></p>';
     echo '<div class = "row"><div class="col">Customer Mobile</div><div class = "col">'.$rows1[0]["MOBILE"].'</div></div><p></p>';
 
-    echo'</div>';
-    echo '<p><br/><br/><center><h5>Products Ordered:</h5></center><br/></p><div class = "card cont1">';
+    echo'<br/></div>';
+    echo '<p><br/><br/><center><h5>Products Ordered:</h5></center><br/></p><div class = " cont1"><br/>';
     echo '<div class = "row"><div class = "col"><b>Order ID</b></div><div class = "col"><b>Product Name</b></div><div class = "col"><b>Quantity</b></div><div class = "col"><b>Size</b></div><div class = "col"><b>Colour</b></div><div class = "col"><b>Price</b></div></div><br><br>';
     
     $sql2 = "SELECT * FROM ORDERS WHERE USERID = :ui";
@@ -86,7 +86,7 @@ if(!isset($_SESSION['email']))
         echo '<div class = "col">'.$items['COLOUR'].'</div>';
         echo '<div class = "col">'.($items['QUANTITY']*$rows3[0]['PRICE']).'</div></div>';
     }
-    echo '</div></div></div>';
+    echo '<br/></div><br/><br/></div>';
     echo '<p><br><br><br/><br></p>';
 
 ?>

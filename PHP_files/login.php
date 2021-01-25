@@ -55,7 +55,7 @@ if(isset($_POST['email'])){
 <head>
     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../CSS/bootstrapcdn.css">
   <link rel="stylesheet" href="../CSS/index.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -105,19 +105,136 @@ if(isset($_POST['email'])){
       } ?>
       </center>
     <br/><br/>
-    <div class = "container">
-      <div class = "card"><center>
-        <div class = "card" style="width:18rem">
+    <div class = "row">
+    <div class = "col"><center>
+      <div class = "card" style="width:18rem; border-radius: 12px;">
         <form method = "POST" action = "login.php">
-        <label for="email">Email</label>
-        <br/><Input type="text" name="email" placeholder="email" required/><br/><br/><br/>
-        <label for="password">Password</label>
-        <br/><Input type="password" name="password" placeholder="password" required/><br/><br/><br/>
-        <label for="remember">Remember Me</label>
-        <Input type="checkbox" name="remember" value="rem"/><br/><br/><br/>
-        <button type="submit" class = "btn btn-primary" name="submit"  >Log In</button><br/>
-    </form>
-    </div></center></div>
+          <br/>
+          <label for="email">Email</label>
+          <br/><Input type="text" name="email" placeholder="email" required/><br/><br/><br/>
+          <label for="password">Password</label>
+          <br/><Input type="password" name="password" placeholder="password" required/><br/><br/><br/>
+          <label for="remember">Remember Me</label>
+          <Input type="checkbox" name="remember" value="rem"/><br/>
+          <button class = "btn btn-link" name="forgot" onClick = "alert('API service for OTP sending and verification is down at the moment. We regret the inconvenience')" >Forgot Password</button><br/><br/>
+          <button type="submit" class = "btn btn-success" name="submit"  >Log In</button><br/><br/>
+      </form></div></center>
     </div>
+    <div class = "col">
+      <center>
+      <div class = "mascot">
+      </div>
+    </center>
+    </div>
+    </div>
+    
 </body>
 </html>
+
+
+
+<?php  
+
+
+//        validating OTP to verify mobile number on forgot password
+//
+//      echo ' <div class="container-fluid otp-background">
+//      <div class="row">
+//      <div class="col-6 text-center text-white"><p>Please Verify your Phone Number to verify your identity.<br></div>
+//      <div class="col-6 text-center text-white">
+//      <form action ="\index.php" method="post">
+//      <div >
+//      Enter OTP sent to number '.$phoneno.'<br>
+//      <input type="number" min="0000" max="9999" name="OtP">
+//      <input type="text" readonly value="'.$_POST['phoneno'].'" name = "phoneno">
+//      <input type="submit" value="validateOtP" name="validateOtP">
+//      </div>
+//      </form>
+//      </div>
+//      </div>
+//      </div>
+
+
+
+//            Forgot Password Code
+//
+//    if(isset($_POST['validateOtPFFF']))
+//    {
+//        if($_POST['OtPF'] == $_SESSION['forgotOTP'])
+//        {
+//            echo'<div class="container-fluid otp-background">
+//    	          <div class="row">
+//    	          <div class="col-6 text-center text-white"><p>Please enter a new password for your account.</p></div>
+//    	          <div class="col-6 text-center text-white">
+//    	          <form action ="\index.php" method="post">
+//    	        <div>
+//    	        Enter new password<br>
+//    	        <input type="text" minlength = "8" name="npass">
+//    	        <input type="text" readonly value="'.$_POST['phonefor'].'" name = "phonefor">
+//    	        <input type="submit" value="Set Password" name="npassw">
+//    	        </div>
+//    	        </form>
+//    	          </div>
+//    	          </div>
+//    	          </div>';
+//        }
+//        else
+//        {
+//            echo '<script>alert("Wrong OTP !!! ");</script>';
+//        }
+//    }
+//    
+//    if(isset($_POST['forgot']))
+//    {
+//        $server = "localhost";
+//    	$username = "root";
+//    	$password = "";
+//    	$con = mysqli_connect($server,$username, $password);
+//    	if(!$con){
+//    		die("Connection Not Created Error in Backend Part");
+//    	}
+//    	else{
+//    	}
+//    
+//    	$mob = strval($_POST['numberforgot']);
+//    		try {
+//                   $pdo = new PDO("mysql:host=localhost;dbname=db",'root','');
+//                   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//               }
+//               catch(PDOException $e) {
+//                   echo "Error: " . $e->getMessage();
+//               }
+//    				   $sql="select count(*) from `users` where phone = (:phone) " ;
+//                               $stmt = $pdo->prepare($sql); 
+//                               $stmt->execute(array( ':phone' => $mob));
+//    							$rows = $stmt->fetchColumn();
+//        if ($rows == 1) {
+//        
+//            $otp = rand(1000, 9000);
+//        $link = "https://api.msg91.com/api/sendotp.php?authkey=".$apik."&mobile=91".$_POST['numberforgot']."&message=Your%20otp%20is%20".$otp."&sender=ABCDEF&otp=".$otp;
+//         $xml = file_get_contents($link);
+//        $_SESSION['forgotOTP'] = $otp;
+//         echo'<div class="container-fluid otp-background">
+//    	          <div class="row">
+//    	          <div class="col-6 text-center text-white"><p>Please Verify your Phone Number </p></div>
+//    	          <div class="col-6 text-center text-white">
+//    	          <form action ="\index.php" method="post">
+//    	        <div>
+//    	        Enter OTP sent to number '.$mob.'<br>
+//    	        <input type="number" min="0000" max="9999" name="OtPF">
+//    	        <input type="text" readonly value="'.$_POST['numberforgot'].'" name = "phonefor">
+//    	        <input type="submit" value="validate" name="validateOtPFFF">
+//    	        </div>
+//    	        </form>
+//    	          </div>
+//    	          </div>
+//    	          </div>';
+//        }
+//        else
+//        {
+//            echo '<script>alert("Not a verified number '.$mob.'");</script>';
+//        }
+//        
+//    }
+
+?>

@@ -36,7 +36,7 @@ if(isset($_POST['confirm']))
 <head>
     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../CSS/bootstrapcdn.css">
   <link rel="stylesheet" href="../CSS/index.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -89,7 +89,7 @@ if(isset($_POST['confirm']))
             else
             {
                 echo '<p><br><br></p>';
-                echo '<div class = "container"><div class = "card">';
+                echo '<div class = "container"><div class = "card card123">';
                 echo '<div class = "row"><div class = "col"><b>Product Name</b></div><div class = "col"><b>Colour</b></div><div class = "col"><b>Quantity</b></div><div class = "col"><b>Price</b></div></div><br><br>';
                 echo '<p></p>';
                 foreach ($_SESSION['cart'] as $items)
@@ -102,8 +102,8 @@ if(isset($_POST['confirm']))
                 echo '</div></div>';
             }
             echo '<p><br></p>';
-
-            echo '<center><form method="POST" action="cart.php"><button type="submit" name="confirm" class = "btn btn-primary" >Confirm Order</button></form></center>';
+            if(sizeof($_SESSION['cart'])>0)
+                echo '<center><form method="POST" action="cart.php"><button type="submit" name="confirm" class = "btn btn-primary" >Confirm Order</button></form></center>';
       ?>
     </body>
 </html>

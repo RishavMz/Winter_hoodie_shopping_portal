@@ -38,3 +38,59 @@ select{
     width:40px;
     height:auto;
 }
+
+.cartitems{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.btn-warning{
+    height: 2rem;
+    padding-top:4px;
+}
+
+.bgn{
+    background-image: radial-gradient(white,floralwhite,skyblue);
+}
+
+.row{
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 98%;
+}
+.indexcard{
+    border-radius: 20px;
+
+}
+.card-footer{
+    background-color: white;
+    text-align: center;
+}
+.price{
+    font-size: 14pt;
+}
+.cont{
+    background-image: radial-gradient(lightblue,lightcyan,lightblue,lightcyan);
+    color: black;
+    font-weight: bold;
+    font-family: 'Roboto';
+    font-size: 25pt;
+}
+.cont1{
+    background-color: floralwhite;
+    color: black;
+    font-weight: normal;
+    font-family: 'Roboto';
+    font-size: 15pt;
+}
+.card123{
+    background-image: radial-gradient(white,floralwhite,ghostwhite,whitesmoke,white,floralwhite,ghostwhite,whitesmoke);
+    color: black;
+    font-family: 'Roboto';
+    font-size: 20pt;
+}
+
+#uploadimage{
+    height: 100px;
+    width:auto;
+}

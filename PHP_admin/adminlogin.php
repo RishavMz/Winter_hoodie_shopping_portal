@@ -31,7 +31,7 @@ if(isset($_POST['userid'])){
 <head>
     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../CSS/bootstrapcdn.css">
   <link rel="stylesheet" href="../CSS/index.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -71,17 +71,22 @@ if(isset($_POST['userid'])){
       } ?>
       </center>
     <br/><br/>
-    <div class = "container">
-      <div class = "card"><center>
-        <div class = "card" style="width:18rem">
-        <form method = "POST" action = "adminlogin.php">
-        <label for="userid">Admin UserName</label>
-        <br/><Input type="text" name="userid" placeholder="userid" required/><br/><br/><br/>
-        <label for="password">Password</label>
-        <br/><Input type="password" name="password" placeholder="password" required/><br/><br/><br/>
-        <button type="submit" class = "btn btn-primary" name="submit"  >Log In</button><br/>
-    </form>
-    </div></center></div>
+    <div class = "row">
+      <div class = "col">
+        <center>
+            <div class = "card" style="width:18rem"><br/>
+            <form method = "POST" action = "adminlogin.php"><br/><br/>
+            <label for="userid">Admin UserName</label>
+            <br/><Input type="text" name="userid" placeholder="userid" required/><br/><br/><br/>
+            <label for="password">Password</label>
+            <br/><Input type="password" name="password" placeholder="password" required/><br/><br/><br/>
+            <button type="submit" class = "btn btn-success" name="submit"  >Log In</button><br/><br/>
+          </form></div>
+        </center>
+      </div>
+      <div class = "col">
+      
+      </div>
     </div>
 </body>
 </html>

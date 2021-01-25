@@ -70,7 +70,7 @@ else{
 <head>
     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../CSS/bootstrapcdn.css">
   <link rel="stylesheet" href="../CSS/index.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -97,7 +97,7 @@ else{
                     <a class = "nav-link" href="profile.php">Welcome '.$_SESSION["firstname"].'</a>
                     </span>
                     <span class="navbar-text">
-                    <a class = "nav-link" href="cart.php">Cart</a>
+                    <a class = "nav-link" href="cart.php">Cart<button class = "btn btn-warning cartitems">'.sizeof($_SESSION['cart']).'</button></a>
                     </span>
                     <span class="navbar-text">
                         <a class = "nav-link" href="logout.php">Log Out</a>
@@ -125,13 +125,17 @@ else{
                 <div class = "card" style="width: 18rem">
                     <?php  echo '<img src = "'.$rows[0]['PATH'].'" alt = "Product image"/>'  ?>
               </div>
-            <h2>PRICE : <?php echo $rows1[0]['PRICE'];?></center>
+              <br/><br/>
+            <button class = "btn btn-info" style = "font-family : roboto ; font-size : 20pt; border-radius: 25px;" disabled>PRICE : <?php echo $rows1[0]['PRICE'];?></button></center>
             </div>
         <div class = "col">
+          
           <div class = "container">
-            <div class = "card">
+            <div class = "card bgn">
+            
               <center>
                 <form method="POST" action="Choose.php">  
+                  <br/><br/>
                 <div class = "card" style = "width: 20rem">
                 <label for="size">SIZE:</label>
                 <select name = "size">
@@ -156,7 +160,7 @@ else{
                 <label for = 'quantity'><br/><br/>QUANTITY:</label>
                 <input type = 'number' name = 'quantity' min='1' max='10' value='1' required/>
                 </div>
-                <br/><br/><button type="submit" class = "btn btn-primary" name="submit"  >Add To Cart</button><br/><br/>
+                <br/><br/><button type="submit" class = "btn btn-success" name="submit"  >Add To Cart</button><br/><br/>
                 </form>
               </center>      
             </div>

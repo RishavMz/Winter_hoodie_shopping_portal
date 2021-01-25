@@ -14,7 +14,7 @@ if(!isset($_SESSION['booked']))
 <head>
     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../CSS/bootstrapcdn.css">
   <link rel="stylesheet" href="../CSS/index.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -22,6 +22,18 @@ if(!isset($_SESSION['booked']))
     <title>Winter hoodie collection-cart</title>
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<a class="navbar-brand" href="../index.php"><img CLASS="logo" src = '../IMAGES/logo.png'></a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarText">
+  <ul class="navbar-nav mr-auto">
+  </ul>
+<span class="navbar-text">
+<a class = "nav-link" href="logout.php">Log Out</a>
+</span></nav>
 <?php 
 
     $sql1 = "SELECT * FROM USERS WHERE EMAIL = :EM";

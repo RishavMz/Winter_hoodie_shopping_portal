@@ -7,7 +7,6 @@ if(!(isset($_SESSION['admin4682'])))
 {
     header('location:adminlogin.php');
 }
-
 $loc = '';
 if(isset($_POST['submit'])){	
   // Count total files
@@ -38,6 +37,7 @@ if(isset($_POST['submit'])){
         }
       }
     }
+    $_SESSION['image'] = $target_file;
   }
   $sql123 = "SELECT MAX(ID) FROM IMAGES" ;
   $stmt123 = $pdo -> prepare($sql123);
@@ -74,7 +74,7 @@ if(isset($_POST['msg']))
 <head>
     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../CSS/bootstrapcdn.css">
   <link rel="stylesheet" href="../CSS/index.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -101,26 +101,33 @@ if(isset($_POST['msg']))
   </div>
   </nav>
 <br/>  
-<div class = "container">
-  <div class = "card"><center>
-  <br/><br/><br/>
-<div class = "card"style="width: 20rem;">
-<form method='POST' action='' enctype='multipart/form-data'>
-    <h5><b>PRODUCT IMAGE:</b></h5><br/><br/>
-  	<input type='file' name='files[]' multiple /><br/><br/>
-    <input type = 'text' name='msg' value = 'File uploaded successfully' hidden/>
-  	<input type='submit' value='Upload' name='submit' /><br/><br/><br/><br/>
-</form></div><br/><br/><br/><div class = "card"style="width: 20rem;">
-<form action = "addproduct.php" method="POST">
+<div class = "container"><br/><br/>
+  <div class = "row">
+  <br/><br/><br/><div class = "col"><center>
+  <div class = "card"style="width: 20rem;">
+    <form method='POST' action='' enctype='multipart/form-data'><br/>
+        <h5><b>PRODUCT IMAGE:</b></h5><br/><br/>
+        <input type='file' name='files[]' multiple /><br/><br/>
+        <input type = 'text' name='msg' value = 'File uploaded successfully' hidden/>
+        <input type='submit' value='Upload' name='submit' /><br/><br/>
+    </form>
+  </div><br/><br/><div id = "image"><?php
+   if(isset($_SESSION['image'])){
+     echo '<img src ="'.$_SESSION['image'].'" alt = "Selected image" style = "height: 100px;width:auto;">'; 
+   }
+   
+   ?></div><br/></div><br/><br/></center>
+  <div class = "col"><center><div class = "card"style="width: 20rem;">
+<form action = "addproduct.php" method="POST"><br/><br/>
     <h5><b>PRODUCT NAME:</b></h5><br/>
     <input type = "text" name = "name" placeholder = "Product name"/><br/><br/>
     <h5><b>PRICE:</b></h5><br/>
     <input type = "text" name = "price" placeholder = "Product price"/><br/><br/>
     <input type = 'text' name='msg' value = 'Product added successfully' hidden/>
     <input type = "submit" name = "Add_Item"/><br/><br/>
-</form></div>
-<br/><br/><br/><center>
-</div></div>
+</form></div></center>
+<br/><br/><br/>
+</div></div></div>
 
 </body>
 </html>

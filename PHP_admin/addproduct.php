@@ -136,6 +136,9 @@ if(isset($_POST['remove'])){
       </ul>
       <?php
       echo '
+        <span class="navbar-text">
+       <a class = "nav-link" href="adminview.php"> VIEW ORDERS </a>
+       </span>
        <span class="navbar-text">
        <a class = "nav-link" href="logout.php"> LOG OUT </a>
        </span>
